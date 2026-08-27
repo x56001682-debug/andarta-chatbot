@@ -1,10 +1,10 @@
-/* Floating Chat Window */
-.chat-container {
+/* Floating Chat circle button in the corner */
+.chat-toggle-btn {
     position: fixed;
     bottom: 90px;
     right: 20px;
     width: 350px;
-    height: 480px; /* Gives it a fixed height so it doesn't stretch */
+    height: 480px; /* Gives it a fixed height so it doesn't take up the whole screen*/
     background-color: #121212;
     border: 1px solid #2a2a2a;
     border-radius: 12px;
@@ -15,8 +15,8 @@
     z-index: 1000;
 }
 
-/* Hidden state when toggled closed */
-.chat-container.hidden {
+/* hides the chat box when toggled off */
+.chat-widget.hidden {
     display: none;
 }
 
