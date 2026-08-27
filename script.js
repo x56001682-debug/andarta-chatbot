@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const chatLauncher = document.getElementById('chat-launcher');
+    const chatLauncher = document.getElementById('chat-toggle');
     const chatWidget = document.getElementById('chat-widget');
     const closeChat = document.getElementById('close-chat');
     const chatForm = document.getElementById('chat-form');
