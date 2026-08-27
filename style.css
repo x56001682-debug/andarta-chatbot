@@ -20,22 +20,27 @@
     display: none;
 }
 
-/* Floating Toggle Button (Circle or Star) */
-.chat-toggle-btn {
+/* the compact chat window box  */ */
+.chat-widget {
     position: fixed;
-    bottom: 20px;
+    bottom: 90px;
     right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #000000;
+    width: 350px;
+    height: 480px;
+    background-color: #121212;
     color: #ffffff;
-    border: 2px solid #333333;
-    border-radius: 50%; /* Makes it a perfect circle */
+    border: 1px solid #2a2a2a;
+    border-radius: 12px; /* Makes it a perfect circle */
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
     z-index: 1001;
+}
+
+/* hides the chat box when toggleg off */
+#chat-widget.hidden {
+    display: none;
 }
