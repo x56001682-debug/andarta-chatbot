@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andarta Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Floating Chat Launcher Button -->
+    <button id="chat-launcher" class="chat-launcher">
+        💬
+    </button>
+
+    <!-- Chat Widget Container -->
+    <div id="chat-widget" class="chat-widget hidden">
+        <div class="chat-header">
+            <h3>Andarta Support</h3>
+            <button id="close-chat" class="close-btn">&times;</button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <div class="message bot">Yo! How can I help you with your Andarta order today?</div>
+        </div>
+        <form id="chat-form" class="chat-form">
+            <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
