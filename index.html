@@ -8,14 +8,14 @@
 </head>
 <body>
 
-<!-- Floating Chat Launcher Button -->
-<button id="chatToggle" class="chat-toggle-btn">💬</button>   
+    <!-- Floating Chat Launcher Button -->
+    <button id="chatToggle" class="chat-toggle-btn" onclick="document.getElementById('chat-widget').classList.toggle('hidden')">💬</button>
 
-<!-- Chat Widget Container -->
+    <!-- Chat Widget Container -->
     <div id="chat-widget" class="chat-widget hidden">
         <div class="chat-header">
             <h3>Andarta Support</h3>
-            <button id="close-chat" class="close-btn">&times;</button>
+            <button id="close-chat" class="close-btn" onclick="document.getElementById('chat-widget').classList.add('hidden')">&times;</button>
         </div>
         <div id="chat-messages" class="chat-messages">
             <div class="message bot">Yo! How can I help you with your Andarta order today?</div>
@@ -25,7 +25,7 @@
             <button type="submit">Send</button>
         </form>
     </div>
-<button class="chat-toggle-btn" id="chatToggle">💬</button>    
+    
     <script src="script.js"></script>
 </body>
 </html>
