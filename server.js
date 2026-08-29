@@ -28,14 +28,14 @@ app.get('/embed.js', (req, res) => {
 
         // If domain isn't registered, status is expired, or trial date has passed, block it
         if (!store || store.status === 'expired' || (store.expiresAt && new Date() > new Date(store.expiresAt))) {
-            return res.send(`console.log("Andarta Chatbot: Trial expired or unauthorized domain.");`);
+            return res.send(`console.log("Ai Chatbot: Trial expired or unauthorized domain.");`);
         }
 
         // Serve the embed script if valid
         res.sendFile(path.resolve('./embed.js'));
     } catch (error) {
         console.error(error);
-        res.status(500).send('console.log("Server error loading widget.");');
+        res.status(500).send('console.log("Ai Chatbot: Server error loading widget.");');
     }
 });
 
