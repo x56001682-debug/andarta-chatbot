@@ -13,16 +13,42 @@ app.use(express.json());
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// Load store configurations
-const storesData = JSON.parse(fs.readFileSync('./stores.json', 'utf8'));
+// Helper function to get clean domain from headers
+function getCleanDomain(req) {
+    const origin = req.headers.origin || req.headers.referer || 'localhost:3000';
+    return origin.replace(/https?:\/\//, '').split('/')[0];
+}
 
-// Chat Route
+// Secure /embed.js route with domain lock and trial/expiration check
+app.get('/embed.js', (req, res) => {
+    try {
+        const cleanDomain = getCleanDomain(req);
+        const storesData = JSON.parse(fs.readFileSync('./stores.json', 'utf8'));
+        const store = storesData[cleanDomain];
+
+        // If domain isn't registered, status is expired, or trial date has passed, block it
+        if (!store || store.status === 'expired' || (store.expiresAt && new Date() > new Date(store.expiresAt))) {
+            return res.send(`console.log("Andarta Chatbot: Trial expired or unauthorized domain.");`);
+        }
+
+        // Serve the embed script if valid
+        res.sendFile(path.resolve('./embed.js'));
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('console.log("Server error loading widget.");');
+    }
+});
+
+// Chat Route with active status validation
 app.post('/chat', async (req, res) => {
   try {
-    const origin = req.headers.origin || req.headers.referer || 'localhost:3000';
-    const cleanDomain = origin.replace(/https?:\/\//, '').split('/')[0];
-    
+    const cleanDomain = getCleanDomain(req);
+    const storesData = JSON.parse(fs.readFileSync('./stores.json', 'utf8'));
     const store = storesData[cleanDomain] || storesData['localhost:3000'];
+
+    if (!store || store.status === 'expired' || (store.expiresAt && new Date() > new Date(store.expiresAt))) {
+        return res.status(403).json({ error: 'Trial expired or unauthorized domain.' });
+    }
 
     const systemPrompt = `You are a helpful customer service chatbot for ${store.storeName}. 
     Products we sell: ${store.products}. 
@@ -46,8 +72,7 @@ app.post('/chat', async (req, res) => {
 app.post('/lead', (req, res) => {
   try {
     const { email } = req.body;
-    const origin = req.headers.origin || req.headers.referer || 'localhost:3000';
-    const cleanDomain = origin.replace(/https?:\/\//, '').split('/')[0];
+    const cleanDomain = getCleanDomain(req);
     
     const leadData = {
       email,
