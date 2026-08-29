@@ -1,0 +1,12 @@
+{
+  "localhost:3000": {
+    "storeName": "Andarta",
+    "policy": "Returns accepted within 30 days. Standard shipping takes 3-5 days.",
+    "products": "Graphic tees, hoodies, and streetwear caps."
+  },
+  "example-store.com": {
+    "storeName": "Client Business B",
+    "policy": "All sales final. Final clearance items cannot be returned.",
+    "products": "Handmade leather goods and accessories."
+  }
+}
